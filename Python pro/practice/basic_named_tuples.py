@@ -33,3 +33,9 @@ class Product:
 
 p = Product('Apple', 1.99)
 print(p)
+
+from typing import List, Dict
+
+def process_data(data: List[Dict[str, str]]) -> None:
+    for item in data:
+        print(item)
