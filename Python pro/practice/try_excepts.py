@@ -19,7 +19,6 @@ def CheckingInteger () -> str:
             return print('Все хорошо')
     except ValueError:
         print('Некоректное значение')
-        CheckingInteger()
 
 # Создай класс исключения TooYoungError, если возраст пользователя < 18.
 
@@ -38,4 +37,91 @@ def check_age(age: int) -> str:
         raise TooYoungError('Вам нет 18 лет')
     else:
         return "Доступ разрешён"
-check_age(18)
+# Задача 4: Счётчик попыток
+# Напиши функцию login(), которая:
+
+# спрашивает имя пользователя (input),
+
+# если имя не "admin", выбрасывает ValueError,
+
+# разрешает 3 попытки ввода, после чего выбрасывает исключение TooManyAttemptsError.
+
+# Создай пользовательское исключение TooManyAttemptsError
+class TooManyAttemptsError(Exception):
+    pass
+
+class InvalidUserError(Exception):
+    pass
+
+def login():
+    attempts = 0
+    while attempts < 3:
+        try:
+            user = input('Введите имя пользователя: ')
+            if user != 'admin':
+                raise InvalidUserError('Неправильное имя пользователя')
+            print('Все хорошо')
+            break
+        except InvalidUserError as e:
+            print(e)
+            attempts += 1
+        if attempts == 3:
+            raise TooManyAttemptsError('Слишком много попыток')
+
+# try:
+#     login()
+# except TooManyAttemptsError as e:
+#     print(e)
+
+
+# Создай функцию set_password(), которая:
+
+# Принимает строку-пароль.
+
+# Если длина пароля < 8 символов, выбрасывает исключение WeakPasswordError.
+
+# Если пароль не содержит хотя бы одну цифру, выбрасывает исключение NoDigitError.
+
+# Если всё ок — возвращает "Пароль установлен"
+
+class WeakPasswordError(Exception):
+    pass
+
+class NoDigitError(Exception):
+    pass
+
+def set_password():
+    try:
+        counter = 0
+        password = input()
+        for letter in password:
+            if letter in '0123456789':
+                counter += 1
+        if counter < 1:
+            raise NoDigitError('Нет чисел в пароле')
+        if len(password) < 8:
+            raise WeakPasswordError('Пароль слабый')
+    except NoDigitError as e:
+        print(e)
+    except WeakPasswordError as e2:
+        print(e2)
+    else:
+        print('Пароль установлен')
+
+# set_password()
+
+# Задача 2: Работа с файлом
+# Напиши функцию read_file(filepath), которая:
+
+# Пытается открыть файл и прочитать его содержимое.
+
+# Если файл не найден — выводит "Файл не найден".
+
+# Если нет прав на чтение — выводит "Нет доступа к файлу".
+
+# В любом случае выводит "Операция завершена".
+def read_file(filepath):
+    with open(filepath, 'r'):
+        pass
+        
+read_file('sdgsg')
