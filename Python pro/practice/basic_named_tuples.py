@@ -39,3 +39,29 @@ from typing import List, Dict
 def process_data(data: List[Dict[str, str]]) -> None:
     for item in data:
         print(item)
+
+def sum_numbers(*args):
+    return sum(args)
+
+print(sum_numbers(1, 2, 3, 4))
+
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(age=30, name="John")
+
+def greet(name: str) -> str:
+    return f"Hello, {name}"
+
+print(greet("Alice"))
+
+squares = [x**2 for x in range(10)]
+print(squares)
+
+gen = (x**2 for x in range(10))
+for val in gen:
+    print(val)
+
+squares_set = {x**2 for x in range(10)}
+print(squares_set)
