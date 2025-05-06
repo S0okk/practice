@@ -25,3 +25,22 @@ def greet(name):
     print(f"Привет, {name}!")
 
 greet("Анна")
+
+import time
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"Время выполнения: {end - start:.4f} сек.")
+        return result
+    return wrapper
+
+@timer
+def long_task():
+    time.sleep(1)
+    print("Задача завершена")
+
+long_task()
+
