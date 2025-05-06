@@ -110,7 +110,6 @@ def cache(func):
             saved[n] = func(n)
         return saved[n]
     return wrapper
-@timer
 @cache
 def square(x):
     print(f"Вычисление квадрата для {x}")
