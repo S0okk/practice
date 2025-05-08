@@ -121,7 +121,32 @@ def set_password():
 
 # В любом случае выводит "Операция завершена".
 def read_file(filepath):
-    with open(filepath, 'r'):
-        pass
-        
-read_file('sdgsg')
+    try:
+        with open(filepath, 'r') as file:
+            content = file.read()
+            print(content)
+    except FileNotFoundError:
+        print("Файл не найден")
+    except PermissionError:
+        print("Нет доступа к файлу")
+    finally:
+        print("Операция завершена")
+
+class InvalidPriceError(Exception):
+    pass
+
+class OutOfStockError(Exception):
+    pass
+
+class Product():
+    def __init__(self,name: str, price: int, stock: int):
+        if price < 0:
+            raise InvalidPriceError('Цена не может быть отрицательной')
+        self.name = name
+        self.price = price
+        self.stock = stock
+    def buy(self, amount):
+        if amount > self.stock:
+            raise OutOfStockError('Не допустимое количество товара')
+        self.stock -= amount
+        return f"Куплено {amount} шт. товара {self.name}"
