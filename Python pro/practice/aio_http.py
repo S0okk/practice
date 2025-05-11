@@ -1,18 +1,27 @@
 import aiohttp
 import asyncio
 
-async def fetch(url, session):
-    async with session.get(url) as response:
-        return await response.json()
+async def post_data(url, data):
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, json=data) as response:
+            return await response.json()
 
 async def main():
-    urls = [
-        "https://jsonplaceholder.typicode.com/posts/1",
-        "https://jsonplaceholder.typicode.com/posts/2",
-    ]
-    async with aiohttp.ClientSession() as session:
-        tasks = [fetch(url, session) for url in urls]
-        results = await asyncio.gather(*tasks)
-        print(results)
+    url = 'http://example.com/api'
+    data = {'key': 'value'}
+    response = await post_data(url, data)
+    print(response)
 
 asyncio.run(main())
+
+async def handle_get(request):
+    return web.Response(text="GET request received")
+
+async def handle_post(request):
+    data = await request.json()
+    return web.Response(text=f"POST request received with data: {data}")
+
+app = web.Application()
+app.router.add_get('/', handle_get)
+app.router.add_post('/', handle_post)
+
