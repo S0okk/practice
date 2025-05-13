@@ -16,3 +16,18 @@ if __name__ == "__main__":
     for process in processes:
         process.join()
     print("All processes completed")
+
+
+import time
+import random
+
+def worker(number):
+    print(f"Поток {number} запущен")
+    time.sleep(random.randint(1, 3))
+    print(f"Поток {number} завершён")
+
+threads = []
+
+# TODO: Создай и запусти 5 потоков
+
+# TODO: Жди завершения всех потоков
