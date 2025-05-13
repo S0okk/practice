@@ -42,3 +42,41 @@
 #             c = 1
 #     s = s[1:]
 # print(st, ma)
+
+# s = open('24-3.txt').readline()
+# c = 0
+# max_len = 0
+# st = ''
+# while s != '':
+#     for i in range(len(s) - 1):
+#         if sorted(s[i] + s[i+1]) == list(s[i] + s[i+1]):
+#             c += 1
+#             st = st + s[i]
+#             if c > max_len:
+#                 max_len = c
+#                 st += s[i]
+#                 print(st)
+#         else:
+#             c = 0
+#             st = ''
+#     s = s[1:]
+# print(st)
+
+s = open('24-2.txt').readline()
+c = 0
+max_len = 0
+st = ''
+while s != '':
+    for i in range(len(s) - 1):
+        if reversed(s[i] + s[i+1]) == list(s[i] + s[i+1]):
+            c += 1
+            st = st + s[i]
+            if c > max_len:
+                max_len = c
+                st += s[i]
+                print(st)
+        else:
+            c = 0
+            st = ''
+    s = s[1:]
+print(st)
