@@ -64,7 +64,7 @@ import threading
 # t1.start()
 # t1.join()
 
-t = threading.Thread(target=worker, args=(1,))
+t = threading.Thread(target=worker, args=('First thread',))
 t.start()
 print(t.is_alive())  # True, если поток ещё работает
 t.join()
